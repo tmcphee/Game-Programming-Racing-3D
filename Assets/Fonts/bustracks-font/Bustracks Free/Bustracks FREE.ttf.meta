@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 3bad7fa53cdee604ea32a54933f9bf7a
+timeCreated: 1585598042
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Bustracks FREE
+  fontNames:
+  - Bustracks FREE
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

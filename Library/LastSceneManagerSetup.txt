@@ -1,7 +1,7 @@
 sceneSetups:
-- path: Assets/Multiplayer.unity
+- path: Assets/Scenes/Multiplayer.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Scenes/Menu_Screen.unity
   isLoaded: 1
   isActive: 1
-- path: Assets/race-track-lake/race_track_lake.unity
-  isLoaded: 1
-  isActive: 0

@@ -7,8 +7,10 @@ using UnityEngine;
 
 public class Networkmanager : NetworkManager {
 
+	GameObject PlayerObject;
+
 	// Use this for initialization
-	int maxplayers = 2;
+	int maxplayers = 1;
 	int currentplayers = 0;
 
 	/*public void StartGame(){
@@ -17,27 +19,23 @@ public class Networkmanager : NetworkManager {
 
 	public void StartupHost(){
 		SetPort();
+		NetworkManager.singleton.maxConnections = 1;
+		
 		NetworkManager.singleton.StartHost();
+		NetworkManager.singleton.playerPrefab = NetworkManager.singleton.spawnPrefabs[0];
+		currentplayers++;
+		Debug.Log("currentplayers: " + currentplayers);
 	}
 
 	public void JoinGame(){
-		if(currentplayers != maxplayers){
+		if(Network.connections.Length < maxplayers) {
 			SetIPAddress();
 			SetPort();
 			NetworkManager.singleton.StartClient();
 			currentplayers++;
+			Debug.Log("currentplayers: " + currentplayers);
 		}
 	}
-
-	/*public void Disconnect(){
-		if (Network.isServer){
-			NetworkManager.singleton.StopHost();
-			NetworkManager.singleton.StopClient();
-		}
-		else{
-			NetworkManager.singleton.StopClient();
-		}
-	}*/
 
 	public void SetPort(){
 		string Port = GameObject.Find("PortFeild").transform.Find("Text").GetComponent<Text>().text;
@@ -50,12 +48,6 @@ public class Networkmanager : NetworkManager {
 		Debug.Log("IP SET: " + IPAddress);
 		NetworkManager.singleton.networkAddress = IPAddress;
 	}
-
-	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId){
-		GameObject player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-		NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-	}
-
 
 	void Start () {
 		

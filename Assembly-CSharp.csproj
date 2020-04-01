@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Networkmanager.cs" />
+     <Compile Include="Assets\PlayerNetwork.cs" />
      <Compile Include="Assets\Scenes\race-track-lake\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
      <Compile Include="Assets\Scripts\Main_Menu.cs" />
      <Compile Include="Assets\Scripts\movement.cs" />

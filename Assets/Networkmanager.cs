@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.Networking.NetworkSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
@@ -13,28 +14,26 @@ public class Networkmanager : NetworkManager {
 	int maxplayers = 1;
 	int currentplayers = 0;
 
+	public class NetMeg : MessageBase{
+		public int value;
+	}
+
 	/*public void StartGame(){
 		SceneManager.LoadScene("Multiplayer", LoadSceneMode.Single);
 	}*/
+	public void setPlayerPrefab(int index){
+		PlayerObject = NetworkManager.singleton.spawnPrefabs[index];
+	}
 
 	public void StartupHost(){
 		SetPort();
-		NetworkManager.singleton.maxConnections = 1;
-		
 		NetworkManager.singleton.StartHost();
-		NetworkManager.singleton.playerPrefab = NetworkManager.singleton.spawnPrefabs[0];
-		currentplayers++;
-		Debug.Log("currentplayers: " + currentplayers);
 	}
 
 	public void JoinGame(){
-		if(Network.connections.Length < maxplayers) {
-			SetIPAddress();
-			SetPort();
-			NetworkManager.singleton.StartClient();
-			currentplayers++;
-			Debug.Log("currentplayers: " + currentplayers);
-		}
+		SetIPAddress();
+		SetPort();
+		NetworkManager.singleton.StartClient();
 	}
 
 	public void SetPort(){
@@ -49,6 +48,26 @@ public class Networkmanager : NetworkManager {
 		NetworkManager.singleton.networkAddress = IPAddress;
 	}
 
+
+	/*public override void OnClientConnect(NetworkConnection conn){
+		IntegerMessage msg = new IntegerMessage(0);
+		ClientScene.AddPlayer(conn, 1, msg);
+	}*/
+	public void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader){
+		NetMeg msg = extraMessageReader.ReadMessage<NetMeg>();
+		Debug.Log("CLIENT SENT: " + msg.value);
+		GameObject playerPrefab = NetworkManager.singleton.spawnPrefabs[0];
+		/*if (NetworkManager.singleton.)
+		{
+			
+			playerPrefab = NetworkManager.singleton.spawnPrefabs[msg.value];
+			
+		}*/
+		
+		GameObject player = (GameObject)Instantiate(playerPrefab, NetworkManager.singleton.GetStartPosition().position, Quaternion.identity);
+		NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+	}
+
 	void Start () {
 		
 	}
@@ -57,4 +76,16 @@ public class Networkmanager : NetworkManager {
 	void Update () {
 		
 	}
+
+	/*****************************************************************************************************/
+	//Client Side
+	/*****************************************************************************************************/
+	
+	public override void OnClientConnect(NetworkConnection conn){
+		NetMeg msg = new NetMeg();
+		msg.value = 1;
+		ClientScene.AddPlayer(conn, 0, msg);
+	}
+
+	
 }

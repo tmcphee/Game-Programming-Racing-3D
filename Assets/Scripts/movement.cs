@@ -10,14 +10,15 @@ public class movement : MonoBehaviour {
 
 	void Start () {
 		rb = this.GetComponent<Rigidbody>();
+		rb.angularDrag = 50;
 	}
 
 	void Update () {
 		if(Input.GetKey(KeyCode.W)) {
-			rb.velocity = this.transform.forward * movementSpeed;
+			rb.AddForce(this.transform.forward * movementSpeed);
 		}
 		else if(Input.GetKey(KeyCode.S)) {
-			rb.velocity = -this.transform.forward * movementSpeed;
+			rb.AddForce(-this.transform.forward * movementSpeed);
 		}
 		if(Input.GetKey(KeyCode.A)) {
 			this.transform.Rotate(0, clockwise, 0);

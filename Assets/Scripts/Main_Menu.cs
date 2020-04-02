@@ -6,17 +6,26 @@ using UnityEngine;
 
 public class Main_Menu : MonoBehaviour {
 	public GameObject ParentObject;
-
+	public GameObject camera;
+	public Vector3 rotation;
 	//Have Only Main Menu Object Enabled
 	//Disable All other menus in unity
 
 	void Start(){
 		ParentObject = GameObject.Find("Canvas");
+		camera = GameObject.Find("Camera");
+		rotation = new Vector3(0.0f, 0.015f, 0.000f);
 	}
 
 	public void quitGame(){
 		Debug.Log("Quitting Now");
 		Application.Quit();
+	}
+
+	void Update()
+	{
+		//camera.transform.rotation = camera.transform.rotation * Quaternion.Euler(rotation);
+		camera.transform.Rotate(rotation ,Space.World);
 	}
 
 

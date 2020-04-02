@@ -4,27 +4,46 @@ using UnityEngine;
 
 public class movement : MonoBehaviour {
 	public float movementSpeed = 20f;
-	public float clockwise = -3.0f;
-	public float counterClockwise = 3.0f;
+	public float clockwise;
 	Rigidbody rb;
+	private Vector3 forward;
+	private float rotation = 0;
+	private int maxRotation = 60;
 
 	void Start () {
 		rb = this.GetComponent<Rigidbody>();
-		rb.angularDrag = 50;
+		Debug.Log(Physics.gravity.y);
 	}
 
 	void Update () {
-		if(Input.GetKey(KeyCode.W)) {
-			rb.AddForce(this.transform.forward * movementSpeed);
-		}
-		else if(Input.GetKey(KeyCode.S)) {
-			rb.AddForce(-this.transform.forward * movementSpeed);
-		}
+		forward = this.transform.forward * movementSpeed;
+		forward.y = rb.velocity.y;
+
+		if (Input.GetKey (KeyCode.W)) {
+			//rb.velocity = forward;
+			rb.AddForce(forward, ForceMode.Acceleration);
+			if (rotation <= maxRotation && rotation >=-maxRotation){
+				this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, rotation, this.transform.eulerAngles.z);
+			}
+		} else if (Input.GetKey (KeyCode.S)) {
+			forward = -forward;
+			forward.y = -forward.y;
+
+			//rb.velocity = forward;
+			rb.AddForce(forward, ForceMode.Acceleration);
+			this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, rotation, this.transform.eulerAngles.z);
+			
+		} 
 		if(Input.GetKey(KeyCode.A)) {
-			this.transform.Rotate(0, clockwise, 0);
+			//this.transform.Rotate(0, clockwise, 0);
+			if (rotation < maxRotation){
+				rotation += clockwise;
+			}
 		}
 		else if(Input.GetKey(KeyCode.D)) {
-			this.transform.Rotate(0, counterClockwise, 0);
+			if (rotation > -maxRotation){
+				rotation -= clockwise;
+			}
 		}
 	}
 }

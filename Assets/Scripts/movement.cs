@@ -45,7 +45,6 @@ public class movement : NetworkBehaviour{ //Add Networking
 			left = -1;
 		else if(Input.GetKey(KeyCode.D))
 			left = 1;
-		transform.Rotate(0, left * forw, 0);
+		this.transform.Rotate(0, left * forw, 0);
 		}
-	}
 }

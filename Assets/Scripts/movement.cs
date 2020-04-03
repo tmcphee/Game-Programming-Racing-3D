@@ -12,6 +12,8 @@ public class movement : NetworkBehaviour{ //Add Networking
 	private Vector3 forward;
 	private float rotation = 0;
 	private int maxRotation = 60;
+	private float forw = 0;
+	private float left = 0;
 
 	void Start () {
 		if (!isLocalPlayer) {
@@ -32,28 +34,18 @@ public class movement : NetworkBehaviour{ //Add Networking
 		if (Input.GetKey (KeyCode.W)) {
 			//rb.velocity = forward;
 			rb.AddForce(forward, ForceMode.Acceleration);
-			if (rotation <= maxRotation && rotation >=-maxRotation){
-				this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, rotation, this.transform.eulerAngles.z);
-			}
 		} else if (Input.GetKey (KeyCode.S)) {
 			forward = -forward;
 			forward.y = -forward.y;
 
 			//rb.velocity = forward;
 			rb.AddForce(forward, ForceMode.Acceleration);
-			this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, rotation, this.transform.eulerAngles.z);
-			
 		} 
-		if(Input.GetKey(KeyCode.A)) {
-			//this.transform.Rotate(0, clockwise, 0);
-			if (rotation < maxRotation){
-				rotation += clockwise;
-			}
-		}
-		else if(Input.GetKey(KeyCode.D)) {
-			if (rotation > -maxRotation){
-				rotation -= clockwise;
-			}
+		if(Input.GetKey(KeyCode.A))
+			left = -1;
+		else if(Input.GetKey(KeyCode.D))
+			left = 1;
+		transform.Rotate(0, left * forw, 0);
 		}
 	}
 }

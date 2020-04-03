@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class movement : MonoBehaviour {
+//public class movement : NetworkBehaviour{ //Add Networking
+
 	public float movementSpeed = 20f;
 	public float clockwise;
 	Rigidbody rb;
@@ -11,11 +14,15 @@ public class movement : MonoBehaviour {
 	private int maxRotation = 60;
 
 	void Start () {
+		//if (isLocalPlayer) { return; } //Add Networking
+
 		rb = this.GetComponent<Rigidbody>();
 		Debug.Log(Physics.gravity.y);
 	}
 
 	void Update () {
+		//if (isLocalPlayer) { return;  } //Add Networking
+
 		forward = this.transform.forward * movementSpeed;
 		forward.y = rb.velocity.y;
 

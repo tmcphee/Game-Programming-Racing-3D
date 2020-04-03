@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scenes\race-track-lake\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
      <Compile Include="Assets\Scripts\Main_Menu.cs" />
      <Compile Include="Assets\Scripts\movement.cs" />
+     <Compile Include="Assets\Scripts\MovementNetworked.cs" />
      <Compile Include="Assets\Scripts\trackLoad.cs" />
      <None Include="Assets\Scenes\race-track-lake\readmore.txt" />
      <None Include="Assets\Scenes\race-track-lake\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />

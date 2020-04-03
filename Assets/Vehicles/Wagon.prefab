@@ -578,8 +578,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.05, z: 0.13}
-  m_Center: {x: 0, y: 0.025, z: 0}
+  m_Size: {x: 0.08, y: 0.2, z: 0.13}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!81 &81987003739929030
 AudioListener:
   m_ObjectHideFlags: 1
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0.05
+  m_SendInterval: 0.04761905
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 1

@@ -68,8 +68,8 @@ public class movement : NetworkBehaviour{ //Add Networking
 		if (isServer && NetworkManager.singleton.numPlayers != 2)
 		{
 			implayer = 1;
-			//LoadingScreen(1);
-			//return;
+			LoadingScreen(1);
+			return;
 		}
 		if (isServer && NetworkManager.singleton.numPlayers == 2 && isgamestarted == false)
 		{

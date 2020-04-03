@@ -56,7 +56,7 @@ public class Main_Menu : MonoBehaviour
 	}
 	public void Option4()
 	{
-		NetworkManager.singleton.GetComponent<Networkmanager>().playerindex = 4;
+		NetworkManager.singleton.GetComponent<Networkmanager>().playerindex = 3;
 		MultiplayerSetup();
 	}
 

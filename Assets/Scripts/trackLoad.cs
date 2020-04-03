@@ -6,7 +6,7 @@ public class trackLoad : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Physics.gravity = new Vector3 (0, -60, 0);
+		Physics.gravity = new Vector3 (0, -20, 0);
 	}
 	
 	[SerializeField]

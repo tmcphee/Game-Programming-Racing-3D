@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-//public class movement : MonoBehaviour {
 public class movement : NetworkBehaviour{ //Add Networking
 
 	public float movementSpeed = 20f;
-	public float clockwise;
+	private float turnSpeed = 40;
 	Rigidbody rb;
 	private Vector3 forward;
-	private float rotation = 0;
-	private int maxRotation = 60;
-	private float forw = 0;
-	private float left = 0;
 
 	void Start () {
 		if (!isLocalPlayer) {
@@ -33,18 +28,18 @@ public class movement : NetworkBehaviour{ //Add Networking
 
 		if (Input.GetKey (KeyCode.W)) {
 			//rb.velocity = forward;
-			rb.AddForce(forward, ForceMode.Acceleration);
+			rb.AddForce (forward, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.S)) {
 			forward = -forward;
 			forward.y = -forward.y;
 
 			//rb.velocity = forward;
-			rb.AddForce(forward, ForceMode.Acceleration);
-		} 
-		if(Input.GetKey(KeyCode.A))
-			left = -1;
-		else if(Input.GetKey(KeyCode.D))
-			left = 1;
-		this.transform.Rotate(0, left * forw, 0);
+			rb.AddForce (forward, ForceMode.Acceleration);
 		}
+
+		if (Input.GetKey (KeyCode.A) && (Input.GetKey (KeyCode.W)) || (Input.GetKey (KeyCode.S)))
+			transform.Rotate (Vector3.up, -turnSpeed * Time.deltaTime);
+		else if (Input.GetKey (KeyCode.D) && (Input.GetKey (KeyCode.W)) || (Input.GetKey (KeyCode.S)))
+			transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
+	}
 }

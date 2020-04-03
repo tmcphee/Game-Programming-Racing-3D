@@ -14,7 +14,10 @@ public class movement : NetworkBehaviour{ //Add Networking
 	private int maxRotation = 60;
 
 	void Start () {
-		if (!isLocalPlayer) { return; } //Add Networking
+		if (!isLocalPlayer) {
+			this.transform.Find("Main Camera").gameObject.SetActive(false);
+			return; 
+		} //Add Networking
 
 		rb = this.GetComponent<Rigidbody>();
 		Debug.Log(Physics.gravity.y);

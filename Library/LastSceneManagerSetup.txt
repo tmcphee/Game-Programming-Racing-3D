@@ -1,10 +1,10 @@
 sceneSetups:
 - path: Assets/Scenes/Menu_Screen.unity
-  isLoaded: 0
-  isActive: 0
-- path: Assets/Scenes/Multiplayer.unity
   isLoaded: 1
   isActive: 1
+- path: Assets/Scenes/Multiplayer.unity
+  isLoaded: 0
+  isActive: 0
 - path: Assets/Scenes/TestingScene.unity
   isLoaded: 0
   isActive: 0

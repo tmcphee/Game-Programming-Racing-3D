@@ -14,14 +14,14 @@ public class movement : NetworkBehaviour{ //Add Networking
 	private int maxRotation = 60;
 
 	void Start () {
-		if (isLocalPlayer) { return; } //Add Networking
+		if (!isLocalPlayer) { return; } //Add Networking
 
 		rb = this.GetComponent<Rigidbody>();
 		Debug.Log(Physics.gravity.y);
 	}
 
 	void Update () {
-		if (isLocalPlayer) { return;  } //Add Networking
+		if (!isLocalPlayer) { return;  } //Add Networking
 
 		forward = this.transform.forward * movementSpeed;
 		forward.y = rb.velocity.y;

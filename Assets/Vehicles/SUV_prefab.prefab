@@ -3137,6 +3137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 35
   implayer: 2
+  movingSound: {fileID: 8300000, guid: 6c81fe7073a492f40b3928f12b738192, type: 3}
+  idleSound: {fileID: 8300000, guid: 91d86271f3c597546909f625729ef9fe, type: 3}
 --- !u!114 &114955895371574258
 MonoBehaviour:
   m_ObjectHideFlags: 1

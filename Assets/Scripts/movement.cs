@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class movement : NetworkBehaviour{ //Add Networking
 
@@ -16,6 +17,9 @@ public class movement : NetworkBehaviour{ //Add Networking
 	private bool[] checkpoints = new bool[4];
 	public int implayer = 2;
 	public static int winner = 0;
+	private AudioSource m_MyAudioSource;
+	public AudioClip movingSound;
+	public AudioClip idleSound;
 
 	void Start () {
 		if (!isLocalPlayer) {
@@ -23,6 +27,10 @@ public class movement : NetworkBehaviour{ //Add Networking
 			return; 
 		} //Add Networking
 
+		m_MyAudioSource = gameObject.AddComponent<AudioSource>();
+		m_MyAudioSource.loop = true;
+		m_MyAudioSource.clip = idleSound;
+		m_MyAudioSource.Play();
 
 		rb = this.GetComponent<Rigidbody>();
 		Debug.Log(Physics.gravity.y);
@@ -79,6 +87,12 @@ public class movement : NetworkBehaviour{ //Add Networking
 			g = GameObject.Find("Wagon(Clone)");
 			if (g) { g.transform.Rotate(buggyRot);}
 
+			g = GameObject.Find("GoKart(Clone)");
+			if (g) { g.transform.Rotate(buggyRot);}
+
+			g = GameObject.Find("SUV_prefab_2(Clone)");
+			if (g) { g.transform.Rotate(buggyRot);}
+
 			LoadingScreen(0);
 			isgamestarted = true;
 		}
@@ -89,12 +103,22 @@ public class movement : NetworkBehaviour{ //Add Networking
 			forward = this.transform.forward * movementSpeed;
 			forward.y = rb.velocity.y;
 			rb.AddForce (forward, ForceMode.Acceleration);
-		} 
-		else if (Input.GetKey (KeyCode.S) && (winner == 0)) {
+			if (m_MyAudioSource.clip == idleSound) {
+				m_MyAudioSource.Stop ();
+				m_MyAudioSource.clip = movingSound;
+				m_MyAudioSource.Play ();
+			}
+		} else if (Input.GetKey (KeyCode.S) && (winner == 0)) {
 			forward = this.transform.forward * -movementSpeed;
 			forward.y = rb.velocity.y;
 
 			rb.AddForce (forward, ForceMode.Acceleration);
+		} else {
+			if (m_MyAudioSource.clip == movingSound) {
+				m_MyAudioSource.Stop ();
+				m_MyAudioSource.clip = idleSound;
+				m_MyAudioSource.Play ();
+			}
 		}
 
 		if ( Input.GetKey (KeyCode.A) && ( Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) )

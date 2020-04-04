@@ -70,7 +70,7 @@ public class Networkmanager : NetworkManager
 	{
 		NetMeg msg = extraMessageReader.ReadMessage<NetMeg>();
 		Debug.Log("CLIENT SENT: " + msg.value + " -- connections: " + Network.connections.Length);
-		GameObject player = Instantiate(NetworkManager.singleton.spawnPrefabs[msg.value], NetworkManager.singleton.GetStartPosition().position, Quaternion.identity) as GameObject;
+		GameObject player = Instantiate(NetworkManager.singleton.spawnPrefabs[msg.value], NetworkManager.singleton.GetStartPosition().position, NetworkManager.singleton.GetStartPosition().rotation) as GameObject;
 		NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 	}
 

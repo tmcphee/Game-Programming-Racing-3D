@@ -9,17 +9,16 @@ public class movement : NetworkBehaviour{ //Add Networking
 
 	public float movementSpeed = 20f;
 	private float turnSpeed = 40;
-	private Vector3 carRot = new Vector3(0.0f, 74, 0.0f);
-	private Vector3 buggyRot = new Vector3(0.0f, 0f, 0.0f);
 	Rigidbody rb;
 	private Vector3 forward;
 	bool isgamestarted = false;
 	private bool[] checkpoints = new bool[4];
-	public int implayer = 2;
+	private int implayer = 2;
 	public static int winner = 0;
 	private AudioSource m_MyAudioSource;
 	public AudioClip movingSound;
 	public AudioClip idleSound;
+	public AudioMixerGroup mixer;
 
 	void Start () {
 		if (!isLocalPlayer) {
@@ -30,10 +29,22 @@ public class movement : NetworkBehaviour{ //Add Networking
 		m_MyAudioSource = gameObject.AddComponent<AudioSource>();
 		m_MyAudioSource.loop = true;
 		m_MyAudioSource.clip = idleSound;
+		m_MyAudioSource.outputAudioMixerGroup = mixer;
 		m_MyAudioSource.Play();
 
 		rb = this.GetComponent<Rigidbody>();
 		Debug.Log(Physics.gravity.y);
+		if (isServer)
+		{
+			this.transform.position = GameObject.Find("SpawnLocationPlayer1").gameObject.transform.position;
+			this.transform.rotation = GameObject.Find("SpawnLocationPlayer1").gameObject.transform.rotation;
+		}
+		else
+		{
+			this.transform.position = GameObject.Find("SpawnLocationPlayer2").gameObject.transform.position;
+			this.transform.rotation = GameObject.Find("SpawnLocationPlayer2").gameObject.transform.rotation;
+		}
+
 	}
 
 	public void LoadingScreen(int value)
@@ -81,18 +92,6 @@ public class movement : NetworkBehaviour{ //Add Networking
 		}
 		if (isServer && NetworkManager.singleton.numPlayers == 2 && isgamestarted == false)
 		{
-			GameObject g = GameObject.Find("SUV_prefab(Clone)");
-			if (g) { g.transform.Rotate(carRot);}
-
-			g = GameObject.Find("Wagon(Clone)");
-			if (g) { g.transform.Rotate(buggyRot);}
-
-			g = GameObject.Find("GoKart(Clone)");
-			if (g) { g.transform.Rotate(buggyRot);}
-
-			g = GameObject.Find("SUV_prefab_2(Clone)");
-			if (g) { g.transform.Rotate(buggyRot);}
-
 			LoadingScreen(0);
 			isgamestarted = true;
 		}
@@ -111,7 +110,6 @@ public class movement : NetworkBehaviour{ //Add Networking
 		} else if (Input.GetKey (KeyCode.S) && (winner == 0)) {
 			forward = this.transform.forward * -movementSpeed;
 			forward.y = rb.velocity.y;
-
 			rb.AddForce (forward, ForceMode.Acceleration);
 		} else {
 			if (m_MyAudioSource.clip == movingSound) {

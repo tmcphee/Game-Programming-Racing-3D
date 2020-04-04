@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using UnityEngine;
 
+
 public class Main_Menu : MonoBehaviour
 {
 	public GameObject ParentObject;
 	public GameObject camera;
 	public Vector3 rotation;
+
 	//Have Only Main Menu Object Enabled
 	//Disable All other menus in unity
 
@@ -117,5 +119,4 @@ public class Main_Menu : MonoBehaviour
 		ParentObject.transform.Find("JoinGameMenu").gameObject.SetActive(false);//Set JoinGameMenu to disabled
 	}
 	/*****************************************************************************************************/
-
 }

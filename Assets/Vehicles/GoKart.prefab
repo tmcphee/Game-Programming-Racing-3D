@@ -4428,7 +4428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8f8b10a28e7c448828273e1f8b7299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 35
+  movementSpeed: 55
   movingSound: {fileID: 8300000, guid: 8f27a88369bc24f46a732cce4fffa3ba, type: 3}
   idleSound: {fileID: 8300000, guid: 2ba11a0b288f7c04ab59f1cdfdd63de6, type: 3}
   mixer: {fileID: 24300002, guid: 7296260f101caed4797f4c40bc0d5095, type: 2}

@@ -37,12 +37,12 @@ public class movement : NetworkBehaviour{ //Add Networking
 		if (isServer)
 		{
 			this.transform.position = GameObject.Find("SpawnLocationPlayer1").gameObject.transform.position;
-			this.transform.rotation = GameObject.Find("SpawnLocationPlayer1").gameObject.transform.rotation;
+			//this.transform.rotation = GameObject.Find("SpawnLocationPlayer1").gameObject.transform.rotation;
 		}
 		else
 		{
 			this.transform.position = GameObject.Find("SpawnLocationPlayer2").gameObject.transform.position;
-			this.transform.rotation = GameObject.Find("SpawnLocationPlayer2").gameObject.transform.rotation;
+			//this.transform.rotation = GameObject.Find("SpawnLocationPlayer2").gameObject.transform.rotation;
 		}
 
 	}
@@ -107,7 +107,8 @@ public class movement : NetworkBehaviour{ //Add Networking
 				m_MyAudioSource.clip = movingSound;
 				m_MyAudioSource.Play ();
 			}
-		} else if (Input.GetKey (KeyCode.S) && (winner == 0)) {
+		}
+		else if (Input.GetKey (KeyCode.S) && (winner == 0)) {
 			forward = this.transform.forward * -movementSpeed;
 			forward.y = rb.velocity.y;
 			rb.AddForce (forward, ForceMode.Acceleration);
@@ -136,6 +137,7 @@ public class movement : NetworkBehaviour{ //Add Networking
 		Text change = this.transform.Find ("Main Camera").transform.Find ("Canvas").transform.Find ("Player_notification").transform.Find ("text").GetComponent<Text>();
 		change.text = "Player " + winner + "\nWins";
 		LoadingScreen(1);
+
 	}
 
 	public void triggerCheckpoint(int id){

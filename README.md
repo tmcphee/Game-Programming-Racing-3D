@@ -1,4 +1,4 @@
-# Deadly Drift Racer - 3D Multiplayer Recing Game
+# Deadly Drift Racer - 3D Multiplayer Racing Game
 ### COMP-4478 Final Project 
 
 ## Overview:
